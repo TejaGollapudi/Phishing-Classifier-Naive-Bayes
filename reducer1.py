@@ -4,20 +4,20 @@
 
 import sys
 
-currkey = None
+prevkey = None
 
 total = 0
 for input_line in sys.stdin:
 	input_line = input_line.strip()
-	prevkey, value = input_line.split("\t", 1)
+	currkey, value = input_line.split("\t", 1)
 	value = int(value)
-	if currkey == prevkey:
+	if prevkey == currkey:
 		total += value
 	else:
-		if currkey:
-			print( "%s\t%d" % (currkey, total) )
+		if prevkey:
+			print( "%s\t%d" % (prevkey, total) )
 		total = value
-		currkey = prevkey
+		prevkey = currkey
 
-if currkey == prevkey:
-	print( "%s\t%d" % (currkey, total) )
+if prevkey == currkey:
+	print( "%s\t%d" % (prevkey, total) )
